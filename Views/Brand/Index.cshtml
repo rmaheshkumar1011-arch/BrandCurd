@@ -1,0 +1,62 @@
+@using WebApp.web.models
+@model List<Brand>
+<div class="Container">
+    <div class="row nb-4">
+        <div class="col-nd-6 text-uppercase">
+            <h2>Brand List</h2>
+        </div>
+        <div class="col-nd-6 text-end">
+            <a asp-Controller="Brand" asp-Action="Create" class="btn btn-primary"><i class="bi bi-plus-circle"></i> create</a>
+        </div>
+    </div>
+    <hr />
+    @if(Model.Count > 0)
+    {
+    <table  id ="table" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th class="text-center">Name</th>
+                <th class="text-center">Established Year</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <body>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td width="40%">@item.Name</td>
+                     <td width="40%">@item.EstablishedYear</td>
+                     
+                    <td class="d-flex align-items-center justify-content-center">
+                        <a asp-controller="Brand" asp-action="Details" asp-route-id="@item.ID"
+                            class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Details">
+                             <i class="bi bi-info-circle"></i></a>
+                             <a asp-controller="Brand" asp-action="Edit" asp-route-id="@item.ID"
+                            class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Edit">
+                             <i class="bi bi-pencil"></i></a>
+                             <a asp-controller="Brand" asp-action="Delete" asp-route-id="@item.ID"
+                            class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete">
+                             <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </body>
+    </table>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-nd-12">
+                    <h2 class="text-center text-uppercase text-warning pt-4 ">No Brands Recorded</h2>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts{
+    <script>
+        $('.table').DataTable();
+    </script>
+}
